@@ -3,12 +3,10 @@
 DESIRED_NODE_VERSION="v6"
 DESIRED_NPM_VERSION="3"
 DESIRED_YO_VERSION="1"
-MY_OS=""
-MY_ARCH=""
-
-#============================================================FUNCTIONS==================================================================#
 
 setOs() {
+    MY_OS=""
+
     case "$OSTYPE" in
         darwin*)  MY_OS="darwin" ;; 
         linux*)   MY_OS="linux" ;;
@@ -25,7 +23,7 @@ setOs() {
     elif [[ "$MY_OS" -eq "linux" ]] && [[ -r /etc/redhat-release  ]] ; then
         MY_OS="rhel"
     elif [[ "$MY_OS" -ne "darwin" ]] ; then
-        echo "The OS: $OSTYPE is not supported"
+        echo "The OS: $OSTYPE is not supported by this script"
         exit 1
     fi
 }
@@ -65,8 +63,7 @@ installYo() {
     fi 
 }
 
-#============================================================SCRIPT START==================================================================#
-
+# Script Start
 setOs
 if [[ "$MY_OS" == "darwin" ]] ; then
     setupMac
