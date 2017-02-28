@@ -56,6 +56,7 @@
     "test": "gulp enforce-code-coverage check-security",
     "transpile": "gulp transpile",
     "validate": "npm ls",
+    "dev-setup": "powershell scripts/setup.ps1",
     "bump-patch": "npm --no-git-tag-version version patch --force && git add package.json && git commit --no-verify --allow-empty-message -m ''"
   },
   "pre-commit": [
