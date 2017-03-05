@@ -12,16 +12,24 @@ function installChoclatey() {
 }
 
 function installNode() {
-    Write-Error 'Not implimented yet'      
+    try {
+        Invoke-Expression 'choco install nodejs-lts'      
+    } catch {
+        Write-Error 'Node install failed'
+    }
 }
 
-function installNpm() {
-    Write-Error 'Not implimented yet'      
+function updateNpm() {
+    try {
+        Invoke-Expression 'npm install -g npm'      
+    } catch {
+        Write-Error 'Node install failed'
+    }     
 }
 
 function installYo() {
     try {
-        npm install -g yo
+        Invoke-Expression 'npm install -g yo'
     } catch {
         Write-Error 'Yeoman install failed'
     }
@@ -68,11 +76,11 @@ if (!$IsWindows) {
     }
 
     if ($err) {
-        Write-Output 'npm not installed'
-        installNpm
+        Write-Output 'npm not installed, reinstalling node to get npm'
+        installNode
     } elseif ($node_version.Split('.')[0] -ne $desired_npm_version) {
         Write-Output 'Current npm version is not desired npm version'
-        installNpm
+        updateNpm
     } else {
         Write-Output 'npm already installed'
     }
